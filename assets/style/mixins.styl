@@ -1,0 +1,29 @@
+ellipsis() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+ellipsis-m(n) {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: n;
+}
+
+flex-row() {
+  display: flex;
+  flex-direction: row;
+}
+
+flex-column() {
+  display: flex;
+  flex-direction: column;
+}
+
+vh-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

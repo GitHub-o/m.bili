@@ -1,0 +1,5 @@
+export default {
+  INIT_PAGE: 'INIT_PAGE',
+  HOME_DATA: 'HOME_DATA',
+  FEATURE_DATA: 'FEATURE_DATA'
+}

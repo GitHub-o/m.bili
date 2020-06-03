@@ -1,0 +1,27 @@
+html,
+body,
+.app,
+.container {
+  position : relative;
+  height: 100vh;
+  font-family : arial, "微软雅黑";
+  touch-action: none;
+  scroll-behavior: smooth;
+  overflow: hidden;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+  color: #fcc;
+  background-color: #38f;
+}

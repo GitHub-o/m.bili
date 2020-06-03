@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html {{ HTML_ATTRS }}>
+
+<head {{ HEAD_ATTRS }}>
+  {{ HEAD }}
+
+  <script type="text/javascript">
+    window.addEventListener(
+      'DOMContentLoaded',
+      () => setTimeout(
+        () => {
+          const { style } = document.body;
+
+          style.visibility = 'visible';
+          setTimeout(() => style.opacity = 1, 100);
+        }, 100)
+    )
+  </script>
+</head>
+
+<body {{ BODY_ATTRS }} style="visibility: hidden; opacity: 0;">
+  {{ APP }}
+</body>
+
+</html>
