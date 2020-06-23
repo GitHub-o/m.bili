@@ -1,8 +1,8 @@
 import * as API from '~/api/index'
 import tools from '~/utils/tools'
 
-export const getHomeData = async (ctx, $data, scroll) => {
-  scroll && !ctx.scroll && (ctx.$emit('update:scroll', scroll));
+export const getHomeData = async (ctx, $data) => {
+  const { scroll } = ctx;
 
   ctx.resetScrollOpt();
 
@@ -41,8 +41,8 @@ export const getHomeData = async (ctx, $data, scroll) => {
   }, duration);
 }
 
-export const getFeatureData = async (ctx, $data, scroll) => {
-  scroll && !ctx.scroll && (ctx.$emit('update:scroll', scroll));
+export const getFeatureData = async (ctx, $data) => {
+  const { scroll } = ctx;
 
   $data.upText = '加载中……';
 

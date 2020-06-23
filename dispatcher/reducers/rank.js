@@ -1,15 +1,13 @@
 import * as API from '~/api'
 import tools from '~/utils/tools'
 
-export const getListData = async (ctx, $data, scroll, type) => {
-  scroll && !ctx.scroll && (ctx.$emit('update:scroll', scroll));
-
+export const getListData = async (ctx, $data, type) => {
   $data.page++;
 
   type === 'up' ? ($data.upText = '加载中……') : ($data.downText = '刷新中……');
 
   const { num, apiName, page, duration } = $data;
-  const { cache } = ctx;
+  const { cache, scroll } = ctx;
 
   const conf = {
     page,
@@ -69,21 +67,23 @@ export const getListData = async (ctx, $data, scroll, type) => {
   }, duration);
 }
 
-export const checkCacheData = (ctx, $data, scroll, type) => {
-  const { cache } = ctx;
+export const checkCacheData = (ctx, $data, type) => {
+  const { cache, scroll } = ctx;
   const { apiName } = $data;
+
+  scroll && scroll.scrollTo(0, 0);
 
   if (!cache[apiName]) {
     $data.page = -1;
     $data.isLoadingShow = true;
-    getListData(ctx, $data, scroll, type);
+    getListData(ctx, $data, type);
     return;
   }
 
   if (!cache[apiName][0]) {
     $data.page = -1;
     $data.isLoadingShow = true;
-    getListData(ctx, $data, scroll, type);
+    getListData(ctx, $data, type);
     return;
   }
 
@@ -94,13 +94,10 @@ export const checkCacheData = (ctx, $data, scroll, type) => {
 export const handleChangeField = (ctx, $data, apiName) => {
   ctx.$emit('update:data', []);
   ctx.$nextTick(() => {
-    const { scroll } = ctx;
-
     $data.apiName = apiName;
     $data.downText = '下拉刷新';
     $data.upText = '上拉加载更多';
 
-    scroll && scroll.scrollTo(0, 0);
-    checkCacheData(ctx, $data, scroll, 'down');
+    checkCacheData(ctx, $data, 'down');
   });
 }

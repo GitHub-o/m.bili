@@ -52,6 +52,8 @@ export default {
           : false
       });
 
+      this.$emit('handleScrollInit', this.scroll);
+
       const { scroll, onPullingDown, onPullingUp } = this;
 
       downText && scroll.on('pullingDown', onPullingDown);
@@ -59,11 +61,11 @@ export default {
     },
 
     onPullingDown () {
-      this.$emit('handleScrollPullingDown', this.scroll);
+      this.$emit('handleScrollPullingDown');
     },
 
     onPullingUp () {
-      this.$emit('handleScrollPullingUp', this.scroll);
+      this.$emit('handleScrollPullingUp');
     }
   }
 };

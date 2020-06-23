@@ -2,6 +2,7 @@
   <MScroll
     :downText="downText"
     :upText="upText"
+    @handleScrollInit="scroll => $emit('update:scroll', scroll)"
     @handleScrollPullingUp="getListData"
     @handleScrollPullingDown="handlePullDown"
   >
@@ -13,6 +14,8 @@
       ></component>
     </keep-alive>
 
+    <NoDataTip v-show="!isLoadingShow && data.length <= 0" />
+
     <Loading v-show="isLoadingShow" />
   </MScroll>
 </template>
@@ -22,6 +25,7 @@ import MScroll from '~/components/Common/Scroll';
 import Common from '~/components/Rank/List/Common';
 import Common2 from '~/components/Rank/List/Common2';
 import Loading from '~/components/Common/Loading';
+import NoDataTip from '~/components/Common/NoDataTip'
 import * as API from '~/api';
 import tools from '~/utils/tools';
 import ToTop from '~/components/Common/ToTop'
@@ -34,7 +38,8 @@ export default {
 
   components: {
     MScroll,
-    Loading
+    Loading,
+    NoDataTip
   },
 
   props: {
@@ -74,29 +79,27 @@ export default {
   },
 
   methods: {
-    async getListData (scroll, type = 'up') {
-      dispatch(this)(types.LIST_DATA, scroll, type);
+    async getListData (type = 'up') {
+      dispatch(this)(types.LIST_DATA, type);
     },
 
     getCacheData (cacheData) {
       return cacheData.reduce((prev, cur) => prev.concat(cur), []);
     },
 
-    checkCacheData (scroll, type) {
-      dispatch(this)(types.CACHE_DATA, scroll, type);
+    checkCacheData (type) {
+      dispatch(this)(types.CACHE_DATA, type);
     },
 
-    handlePullDown (scroll) {
+    handlePullDown () {
       const { cache, num, apiName } = this;
-
-      scroll && !this.scroll && (this.$emit('update:scroll', scroll));
 
       delete cache[apiName];
 
       this.page = -1;
       this.$emit('update:data', []);
 
-      this.checkCacheData(scroll, 'down');
+      this.checkCacheData('down');
     },
   },
 }

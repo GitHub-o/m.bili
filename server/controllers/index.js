@@ -177,6 +177,7 @@ class Index {
   }
 
   async getLiveData (query) {
+    query.limit = 24;
     return Live.findAll(query);
   }
 

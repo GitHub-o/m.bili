@@ -32,9 +32,12 @@ const Live = seq.define('live', {
     allowNull: false
   },
 
-  tag: {
+  tags: {
     type: STRING,
-    allowNull: false
+    allowNull: false,
+    set (val) {
+      return this.setDataValue('tags', JSON.stringify(val));
+    }
   },
 
   status: {

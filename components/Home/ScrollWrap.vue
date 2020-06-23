@@ -2,6 +2,7 @@
   <MScroll
     :downText="downText"
     :upText="upText"
+    @handleScrollInit="scroll => $emit('update:scroll', scroll)"
     @handleScrollPullingDown="getHomeData"
     @handleScrollPullingUp="getFeatureData"
   >
@@ -90,12 +91,12 @@ export default {
   },
 
   methods: {
-    async getHomeData (scroll) {
-      dispatch(this)(types.HOME_DATA, scroll);
+    async getHomeData () {
+      dispatch(this)(types.HOME_DATA);
     },
 
-    async getFeatureData (scroll) {
-      dispatch(this)(types.FEATURE_DATA, scroll);
+    async getFeatureData () {
+      dispatch(this)(types.FEATURE_DATA);
     },
 
     resetScrollOpt () {

@@ -37,7 +37,7 @@
         <p
           class="tags"
           v-if="item.tags"
-        >{{ JSON.parse(item.tags).join(', ') }}</p>
+        >{{ JSON.parse(item.tags).join('、') }}</p>
       </div>
     </a>
   </li>
@@ -123,7 +123,7 @@ export default {
           padding: 0 0.3rem;
           border: 0.1rem solid;
           border-radius: 0.3rem;
-          color: #555;
+          color: #aaa;
         }
 
         .name {
